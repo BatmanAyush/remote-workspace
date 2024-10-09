@@ -1,213 +1,135 @@
-import { Link, useNavigate } from "react-router-dom"
+import { useState, useEffect } from 'react'
+import { Moon, Sun, Pen, Instagram, Twitter, Github, BookOpen, Users, Zap } from 'lucide-react'
 import { Button } from "@/components/ui/button"
-import { Linkedin, FileText, Video, Edit3, Users, MessageSquare, Calendar, Lock } from "lucide-react"
+import { Card, CardContent } from "@/components/ui/card"
+import logo from './logo.jpg'
+import { useNavigate } from 'react-router-dom'
+
+function ReasonCard({ icon: Icon, title, description }) {
+  return (
+    <Card className="transition-all duration-300 hover:shadow-2xl hover:-translate-y-2">
+      <CardContent className="p-6 flex flex-col items-center text-center">
+        <Icon className="h-12 w-12 text-red-600 mb-4" />
+        <h3 className="text-xl font-bold mb-2 transition-all duration-300 hover:text-red-600">{title}</h3>
+        <p className="transition-all duration-300 hover:text-red-500">{description}</p>
+      </CardContent>
+    </Card>
+  )
+}
 
 export default function LandingPage() {
   const navigate = useNavigate();
-  return (
-    <div className="flex flex-col min-h-screen bg-gray-900 text-gray-100">
-      <header className="px-4 lg:px-6 h-16 flex items-center border-b border-gray-800">
-        <Link to="/" className="flex items-center justify-center">
-          <span className="sr-only">WorkSpace</span>
-          <span className="font-bold text-2xl text-teal-400">WorkSpace</span>
-        </Link>
-        <nav className="ml-auto flex gap-4 sm:gap-6">
-          <Link to="#about" className="text-sm font-medium hover:text-teal-400 transition-colors">
-            About Us
-          </Link>
-          <Button variant="outline" className="border-teal-400 text-teal-400 hover:bg-teal-400 hover:text-gray-900" onClick={()=>{
-            navigate("/sign");
-          }}>
-  
-            Login / Sign Up
+  const [darkMode, setDarkMode] = useState(true)
 
+  useEffect(() => {
+    if (darkMode) {
+      document.documentElement.classList.add('dark')
+    } else {
+      document.documentElement.classList.remove('dark')
+    }
+  }, [darkMode])
+
+  return (
+    <div className={`min-h-screen ${darkMode ? 'dark' : ''}`}>
+      <div className="bg-gray-50 dark:bg-gray-900 text-gray-900 dark:text-white transition-all duration-300 ease-in-out">
+        {/* Header */}
+        <header className="container mx-auto px-4 py-6 flex justify-between items-center">
+          <div className="flex items-center">
+            <img 
+              src={logo} 
+              alt="BatCode Logo" 
+              className="h-20 w-20 rounded-full object-cover transition-transform duration-300 hover:scale-110" 
+            />
+          </div>
+          <div className="flex items-center space-x-4">
+            <Button variant="outline" className="transition-all duration-300 hover:bg-red-600 hover:text-white">Login</Button>
+            <Button
+              variant="ghost"
+              size="icon"
+              onClick={() => setDarkMode(!darkMode)}
+              aria-label="Toggle theme"
+              className="transition-all duration-300 hover:rotate-180"
+            >
+              {darkMode ? <Sun className="h-6 w-6" /> : <Moon className="h-6 w-6" />}
+            </Button>
+          </div>
+        </header>
+
+        {/* Hero Section */}
+        <section className="container mx-auto px-4 py-20 text-center">
+          <h1 className="text-4xl md:text-6xl font-bold mb-4 transition-all duration-300 hover:text-red-600">
+            Gear Ready to upskill: Your Best preparation platform
+          </h1>
+          <p className="text-xl md:text-2xl mb-8 transition-all duration-300 hover:text-red-500">
+            Explore your learning by accessing DSA resources for free!!
+          </p>
+          <Button  onClick={()=>{
+                navigate('/login')
+              }} className="bg-red-600 hover:bg-red-700 text-white transition-all duration-300 hover:scale-110 hover:shadow-lg">
+            Get Started
           </Button>
-        </nav>
-      </header>
-      <main className="flex-1">
-        <section className="w-full py-12 md:py-24 lg:py-32 xl:py-48 px-4">
-          <div className="container mx-auto text-center">
-            <h1 className="text-4xl font-bold tracking-tighter sm:text-5xl md:text-6xl lg:text-7xl mb-6">
-              Welcome to <span className="text-teal-400">WorkSpace</span>
-            </h1>
-            <p className="mx-auto max-w-[700px] text-gray-400 md:text-xl mb-12">
-              Empowering teams with innovative collaboration tools
-            </p>
-            <div className="space-x-4">
-              <Button className="bg-teal-600 hover:bg-teal-700 text-white">Get Started</Button>
-              <Button variant="outline" className="border-teal-400 text-teal-400 hover:bg-teal-400 hover:text-gray-900">
-                Learn More
+        </section>
+
+        {/* Resources Section */}
+        <section className="container mx-auto px-4 py-20">
+          <Card className="max-w-sm mx-auto transition-all duration-300 hover:shadow-2xl hover:-translate-y-2">
+            <CardContent className="flex flex-col items-center p-6">
+              <Pen className="h-16 w-16 text-red-600 mb-4 transition-all duration-300 hover:scale-125" />
+              <h2 className="text-2xl font-bold mb-2 transition-all duration-300 hover:text-red-600">BatCode's DSA Resources</h2>
+              <Button onClick={()=>{
+                navigate('/login')
+              }} className="bg-red-600 hover:bg-red-700 text-white transition-all duration-300 hover:scale-110 hover:shadow-lg">
+                Free
               </Button>
-            </div>
-          </div>
+            </CardContent>
+          </Card>
         </section>
-        <section id="features" className="w-full py-12 md:py-24 lg:py-32 bg-gray-800">
-          <div className="container mx-auto px-4">
-            <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl text-center mb-12">Our Features</h2>
-            <div className="grid gap-10 sm:grid-cols-2 lg:grid-cols-4">
-              <div className="flex flex-col items-center space-y-4 text-center">
-                <div className="p-4 bg-teal-500 rounded-full">
-                  <FileText className="h-8 w-8 text-white" />
-                </div>
-                <h3 className="text-xl font-bold">Project Management Tools</h3>
-                <p className="text-gray-400">Streamline your workflow with our intuitive project management suite.</p>
-              </div>
-              <div className="flex flex-col items-center space-y-4 text-center">
-                <div className="p-4 bg-teal-500 rounded-full">
-                  <Video className="h-8 w-8 text-white" />
-                </div>
-                <h3 className="text-xl font-bold">Video Conferencing Integration</h3>
-                <p className="text-gray-400">Connect with your team face-to-face, no matter where they are.</p>
-              </div>
-              <div className="flex flex-col items-center space-y-4 text-center">
-                <div className="p-4 bg-teal-500 rounded-full">
-                  <Edit3 className="h-8 w-8 text-white" />
-                </div>
-                <h3 className="text-xl font-bold">Shared Document Editing</h3>
-                <p className="text-gray-400">Collaborate in real-time on documents, spreadsheets, and presentations.</p>
-              </div>
-              <div className="flex flex-col items-center space-y-4 text-center">
-                <div className="p-4 bg-teal-500 rounded-full">
-                  <Users className="h-8 w-8 text-white" />
-                </div>
-                <h3 className="text-xl font-bold">Team-Building Activities</h3>
-                <p className="text-gray-400">Foster a strong team culture with our built-in team-building tools.</p>
-              </div>
-            </div>
-          </div>
-        </section>
-        <section className="w-full py-12 md:py-24 lg:py-32 bg-gray-900">
-          <div className="container mx-auto px-4">
-            <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl text-center mb-12">What Our Customers Say</h2>
-            <div className="grid gap-8 md:grid-cols-3">
-              {[
-                {
-                  quote: "This platform has revolutionized how our team collaborates. It's a game-changer!",
-                  author: "Jane Doe",
-                  role: "CEO, TechCorp"
-                },
-                {
-                  quote: "The features are intuitive and have significantly boosted our productivity.",
-                  author: "John Smith",
-                  role: "Project Manager, InnovateCo"
-                },
-                {
-                  quote: "Customer support is top-notch. They're always there when we need them.",
-                  author: "Emily Brown",
-                  role: "CTO, StartupX"
-                }
-              ].map((testimonial, index) => (
-                <div key={index} className="bg-gray-800 p-6 rounded-lg">
-                  <p className="text-lg mb-4">"{testimonial.quote}"</p>
-                  <p className="font-semibold">{testimonial.author}</p>
-                  <p className="text-teal-400">{testimonial.role}</p>
-                </div>
-              ))}
-            </div>
-          </div>
-        </section>
-        <section className="w-full py-12 md:py-24 lg:py-32 bg-gray-800">
-          <div className="container mx-auto px-4">
-            <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl text-center mb-12">Collaboration Features</h2>
-            <div className="grid gap-8 md:grid-cols-3">
-              {[
-                {
-                  name: "Real-Time Communication",
-                  icon: <MessageSquare className="h-8 w-8 text-teal-400" />,
-                  description: "Stay connected with your team through instant messaging, voice calls, and video conferences.",
-                  features: [
-                    "Instant messaging with threaded conversations",
-                    "HD video and audio calls",
-                    "Screen sharing and collaborative whiteboarding",
-                    "Integrated file sharing within chats"
-                  ]
-                },
-                {
-                  name: "Project Coordination",
-                  icon: <Calendar className="h-8 w-8 text-teal-400" />,
-                  description: "Manage projects efficiently with our comprehensive suite of planning and tracking tools.",
-                  features: [
-                    "Interactive Gantt charts and Kanban boards",
-                    "Task assignment and progress tracking",
-                    "Time tracking and reporting",
-                    "Customizable project templates"
-                  ]
-                },
-                {
-                  name: "Secure File Management",
-                  icon: <Lock className="h-8 w-8 text-teal-400" />,
-                  description: "Keep your files organized, accessible, and secure with our advanced file management system.",
-                  features: [
-                    "Cloud storage with version control",
-                    "Granular access permissions",
-                    "Automatic file backup and recovery",
-                    "Integration with popular cloud storage services"
-                  ]
-                }
-              ].map((feature, index) => (
-                <div key={index} className="bg-gray-900 p-6 rounded-lg flex flex-col h-full">
-                  <div className="flex items-center mb-4">
-                    {feature.icon}
-                    <h3 className="text-2xl font-bold ml-2">{feature.name}</h3>
-                  </div>
-                  <p className="text-gray-400 mb-6">{feature.description}</p>
-                  <ul className="mb-6 flex-grow">
-                    {feature.features.map((item, fIndex) => (
-                      <li key={fIndex} className="flex items-center mb-2">
-                        <div className="mr-2 w-1 h-1 bg-teal-400 rounded-full"></div>
-                        <span>{item}</span>
-                      </li>
-                    ))}
-                  </ul>
-                  <Button className="w-full bg-teal-600 hover:bg-teal-700 text-white mt-auto">Get Started</Button>
-                </div>
-              ))}
-            </div>
-          </div>
-        </section>
-        <section className="w-full py-12 md:py-24 lg:py-32 bg-teal-600">
-          <div className="container mx-auto px-4 text-center">
-            <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl mb-6">Ready to Get Started?</h2>
-            <p className="mx-auto max-w-[700px] text-xl mb-8">
-              Join thousands of teams already using our platform to boost their productivity and collaboration.
-            </p>
-            <Button className="bg-white text-teal-600 hover:bg-gray-100">Sign Up Now</Button>
-          </div>
-        </section>
-      </main>
-      <footer className="w-full py-6 px-4 bg-gray-800 border-t border-gray-700">
-        <div className="container mx-auto">
+
+        {/* Why Choose Us Section */}
+        <section className="container mx-auto px-4 py-20">
+          <h2 className="text-3xl font-bold text-center mb-12 transition-all duration-300 hover:text-red-600">Why Choose Us</h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <div>
-              <h3 className="text-lg font-semibold mb-4">Company</h3>
-              <p className="text-sm text-gray-400">© 2024 Company. All rights reserved.</p>
-            </div>
-            <div>
-              <h3 className="text-lg font-semibold mb-4">Quick Links</h3>
-              <nav className="flex flex-col space-y-2">
-                <Link to="/privacy" className="text-sm text-gray-400 hover:text-teal-400 transition-colors">
-                  Privacy Policy
-                </Link>
-                <Link to="/terms" className="text-sm text-gray-400 hover:text-teal-400 transition-colors">
-                  Terms of Service
-                </Link>
-              </nav>
-            </div>
-            <div>
-              <h3 className="text-lg font-semibold mb-4">Follow Us</h3>
-              <div className="flex space-x-4">
-               
-          
-                <a href="#" className="text-gray-400 hover:text-teal-400 transition-colors">
-                  <Linkedin className="h-6 w-6" />
-                  <span className="sr-only">LinkedIn</span>
-                </a>
-                
-              </div>
-            </div>
+            <ReasonCard 
+              icon={BookOpen}
+              title="Comprehensive Resources"
+              description="Access a wide range of DSA topics with in depth resources Links Attach To it."
+            />
+            <ReasonCard 
+              icon={Users}
+              title="Begineer Friendly"
+              description="Anyone can use this platform!it is completely free and begineer friendly with mention prequesites and its resources respectively"
+            />
+            <ReasonCard 
+              icon={Zap}
+              title="Quality"
+              description="The level of Questions provided are based on LeetCode which is the top coding Questions platorm.We provide the filtered way of their questions in structured manner so that its easy for users to upskill!!!"
+            />
           </div>
-        </div>
-      </footer>
+        </section>
+
+        {/* Social Media Section */}
+        <section className="container mx-auto px-4 py-20 text-center">
+          <h2 className="text-3xl font-bold mb-8 transition-all duration-300 hover:text-red-600">My Social Media</h2>
+          <div className="flex justify-center space-x-6">
+            <a href="#" aria-label="Instagram" className="transition-all duration-300 hover:scale-125">
+              <Instagram className="h-8 w-8 text-red-600" />
+            </a>
+            <a href="#" aria-label="Twitter" className="transition-all duration-300 hover:scale-125">
+              <Twitter className="h-8 w-8 text-red-600" />
+            </a>
+            <a href="#" aria-label="GitHub" className="transition-all duration-300 hover:scale-125">
+              <Github className="h-8 w-8 text-red-600" />
+            </a>
+          </div>
+        </section>
+
+        {/* Footer */}
+        <footer className="bg-gray-100 dark:bg-gray-800 py-6 transition-all duration-300">
+          <div className="container mx-auto px-4 text-center">
+            <p className="transition-all duration-300 hover:text-red-600">&copy; {new Date().getFullYear()} BatCode. All rights reserved.</p>
+          </div>
+        </footer>
+      </div>
     </div>
   )
 }

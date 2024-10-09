@@ -8,6 +8,8 @@ import Dashboard from './Dashboard';
 import Employee from './user/Employee';
 import Admin from './user/Admin';
 import Userdetails from './Userdetails';
+import DSA from './DSA';
+
 
 
 const App = () => {
@@ -15,9 +17,8 @@ const App = () => {
     <div>
  <Router>
       <Routes>
-        <Route path="/" element={<LandingPage/>} />
+        <Route path="/" element={<DSA/>} />
         <Route path="/login" element={<Login/>}/>
-        <Route path="/sign" element={<SignUp/>}/>
         <Route path='/edash' element={
           <PrivateRoute>  <Employee/>
           </PrivateRoute>
